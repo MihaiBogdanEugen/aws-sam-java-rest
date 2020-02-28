@@ -17,11 +17,7 @@
 
 package com.amazonaws.config;
 
-import com.amazonaws.handler.CreateOrderHandler;
-import com.amazonaws.handler.DeleteOrderHandler;
-import com.amazonaws.handler.GetOrderHandler;
-import com.amazonaws.handler.GetOrdersHandler;
-import com.amazonaws.handler.UpdateOrderHandler;
+import com.amazonaws.handler.*;
 import dagger.Component;
 
 import javax.inject.Singleton;

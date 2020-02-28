@@ -17,10 +17,6 @@
 
 package com.amazonaws.handler;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.TestContext;
@@ -31,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
+
+import static org.junit.Assert.*;
 
 public class CreateOrderHandlerIT extends OrderHandlerTestBase {
 

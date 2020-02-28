@@ -18,11 +18,11 @@ package com.amazonaws.handler;
 import com.amazonaws.model.response.ErrorMessage;
 import com.amazonaws.model.response.GatewayResponse;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.util.Collections;
 import java.util.Map;
 

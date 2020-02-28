@@ -17,37 +17,15 @@
 
 package com.amazonaws.dao;
 
-import com.amazonaws.exception.CouldNotCreateOrderException;
-import com.amazonaws.exception.OrderDoesNotExistException;
-import com.amazonaws.exception.TableDoesNotExistException;
-import com.amazonaws.exception.UnableToDeleteException;
-import com.amazonaws.exception.UnableToUpdateException;
+import com.amazonaws.exception.*;
 import com.amazonaws.model.Order;
 import com.amazonaws.model.OrderPage;
 import com.amazonaws.model.request.CreateOrderRequest;
-
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.ConditionalCheckFailedException;
-import software.amazon.awssdk.services.dynamodb.model.DeleteItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.DeleteItemResponse;
-import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.GetItemResponse;
-import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.ResourceNotFoundException;
-import software.amazon.awssdk.services.dynamodb.model.ReturnValue;
-import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
-import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
-import software.amazon.awssdk.services.dynamodb.model.UpdateItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.UpdateItemResponse;
+import software.amazon.awssdk.services.dynamodb.model.*;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderDao {
@@ -203,7 +181,6 @@ public class OrderDao {
      * @return the deleted order
      */
     public Order deleteOrder(final String orderId) {
-        final DeleteItemResponse result;
         try {
             return Optional.ofNullable(dynamoDb.deleteItem(DeleteItemRequest.builder()
                             .tableName(tableName)

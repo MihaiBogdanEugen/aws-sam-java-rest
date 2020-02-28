@@ -18,7 +18,6 @@
 package com.amazonaws.config;
 
 import com.amazonaws.dao.OrderDao;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
@@ -26,10 +25,10 @@ import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClientBuilder;
 
-import java.net.URI;
-import java.util.Optional;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.net.URI;
+import java.util.Optional;
 
 @Module
 public class OrderModule {

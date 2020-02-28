@@ -17,16 +17,13 @@
 
 package com.amazonaws.handler;
 
-import com.amazonaws.model.response.GatewayResponse;
 import com.amazonaws.services.lambda.runtime.TestContext;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetOrderHandlerTest {
