@@ -59,4 +59,8 @@ public interface OrderRequestStreamHandler extends RequestStreamHandler {
     default boolean isNullOrEmpty(final String string) {
         return string == null || string.isEmpty();
     }
+
+    default boolean isNull(final JsonNode node) {
+        return node == null || node.isNull() || node.isMissingNode();
+    }
 }

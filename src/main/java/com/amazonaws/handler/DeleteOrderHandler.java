@@ -57,7 +57,7 @@ public class DeleteOrderHandler implements OrderRequestStreamHandler {
             writeInvalidJsonInStreamResponse(objectMapper, output, e.getMessage());
             return;
         }
-        if (event == null) {
+        if (isNull(event)) {
             writeInvalidJsonInStreamResponse(objectMapper, output, "event was null");
             return;
         }

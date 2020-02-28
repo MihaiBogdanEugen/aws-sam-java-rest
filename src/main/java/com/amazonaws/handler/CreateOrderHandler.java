@@ -68,12 +68,12 @@ public class CreateOrderHandler implements OrderRequestStreamHandler {
             return;
         }
 
-        if (event == null) {
+        if (isNull(event)) {
             writeInvalidJsonInStreamResponse(objectMapper, output, "event was null");
             return;
         }
         JsonNode createOrderRequestBody = event.findValue("body");
-        if (createOrderRequestBody == null) {
+        if (isNull(createOrderRequestBody)) {
             objectMapper.writeValue(output,
                     new GatewayResponse<>(
                             objectMapper.writeValueAsString(
