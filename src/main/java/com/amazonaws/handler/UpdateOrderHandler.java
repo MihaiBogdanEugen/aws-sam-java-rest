@@ -112,12 +112,12 @@ public class UpdateOrderHandler implements OrderRequestStreamHandler {
 
         try {
             Order updatedOrder = orderDao.updateOrder(
-                    Order.builder().orderId(orderId)
-                            .customerId(request.getCustomerId())
-                            .version(request.getVersion())
-                            .preTaxAmount(request.getPreTaxAmount())
-                            .postTaxAmount(request.getPostTaxAmount())
-                            .build());
+                    new Order()
+                            .withOrderId(orderId)
+                            .withCustomerId(request.getCustomerId())
+                            .withVersion(request.getVersion())
+                            .withPreTaxAmount(request.getPreTaxAmount())
+                            .withPostTaxAmount(request.getPostTaxAmount()));
             objectMapper.writeValue(output, new GatewayResponse<>(
                     objectMapper.writeValueAsString(updatedOrder),
                     APPLICATION_JSON, SC_OK));

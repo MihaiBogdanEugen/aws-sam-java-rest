@@ -46,8 +46,8 @@ public class OrderDaoTest {
     @Test(expected = TableDoesNotExistException.class)
     public void createOrder_whenTableDoesNotExist_throwsTableDoesNotExistException() {
         doThrow(ResourceNotFoundException.builder().build()).when(dynamoDb).putItem(any(PutItemRequest.class));
-        sut.createOrder(CreateOrderRequest.builder()
-                .preTaxAmount(100L).postTaxAmount(109L).customerId("me").build());
+        sut.createOrder(new CreateOrderRequest()
+                .withPreTaxAmount(100L).withPostTaxAmount(109L).withCustomerId("me"));
     }
 
     @Test(expected = TableDoesNotExistException.class)
@@ -123,25 +123,23 @@ public class OrderDaoTest {
     @Test(expected = TableDoesNotExistException.class)
     public void updateOrder_whenTableDoesNotExistOnLoadItem_throwsTableDoesNotExistException() {
         doThrow(ResourceNotFoundException.builder().build()).when(dynamoDb).updateItem(any(UpdateItemRequest.class));
-        sut.updateOrder(Order.builder()
-                .orderId(ORDER_ID)
-                .customerId("customer")
-                .preTaxAmount(BigDecimal.ONE)
-                .postTaxAmount(BigDecimal.TEN)
-                .version(0L)
-                .build());
+        sut.updateOrder(new Order()
+                .withOrderId(ORDER_ID)
+                .withCustomerId("customer")
+                .withPreTaxAmount(BigDecimal.ONE)
+                .withPostTaxAmount(BigDecimal.TEN)
+                .withVersion(0L));
     }
 
     @Test(expected = TableDoesNotExistException.class)
     public void updateOrder_whenTableDoesNotExist_throwsTableDoesNotExistException() {
         doThrow(ResourceNotFoundException.builder().build()).when(dynamoDb).updateItem(any(UpdateItemRequest.class));
-        sut.updateOrder(Order.builder()
-                .orderId(ORDER_ID)
-                .customerId("customer")
-                .preTaxAmount(BigDecimal.ONE)
-                .postTaxAmount(BigDecimal.TEN)
-                .version(1L)
-                .build());
+        sut.updateOrder(new Order()
+                .withOrderId(ORDER_ID)
+                .withCustomerId("customer")
+                .withPreTaxAmount(BigDecimal.ONE)
+                .withPostTaxAmount(BigDecimal.TEN)
+                .withVersion(1L));
     }
 
     @Test(expected = TableDoesNotExistException.class)
@@ -158,8 +156,10 @@ public class OrderDaoTest {
     @Test(expected = CouldNotCreateOrderException.class)
     public void createOrder_whenAlreadyExists_throwsCouldNotCreateOrderException() {
         doThrow(ConditionalCheckFailedException.builder().build()).when(dynamoDb).putItem(any(PutItemRequest.class));
-        sut.createOrder(CreateOrderRequest.builder()
-                .preTaxAmount(100L).postTaxAmount(109L).customerId("me").build());
+        sut.createOrder(new CreateOrderRequest()
+                .withPreTaxAmount(100L)
+                .withPostTaxAmount(109L)
+                .withCustomerId("me"));
     }
 
     @Test(expected = UnableToDeleteException.class)
@@ -313,10 +313,10 @@ public class OrderDaoTest {
         createdItem.put("version", AttributeValue.builder().n("1").build());
         doReturn(PutItemResponse.builder().attributes(createdItem).build()).when(dynamoDb).putItem(any(PutItemRequest.class));
 
-        Order order = sut.createOrder(CreateOrderRequest.builder()
-                .customerId("customer")
-                .preTaxAmount(1L)
-                .postTaxAmount(10L).build());
+        Order order = sut.createOrder(new CreateOrderRequest()
+                .withCustomerId("customer")
+                .withPreTaxAmount(1L)
+                .withPostTaxAmount(10L));
         assertNotNull(order.getVersion());
         //for a new item, object mapper sets version to 1
         assertEquals(1L, order.getVersion().longValue());

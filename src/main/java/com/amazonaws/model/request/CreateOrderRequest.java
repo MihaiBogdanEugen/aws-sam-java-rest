@@ -17,17 +17,59 @@
 
 package com.amazonaws.model.request;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.*;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@JsonAutoDetect
 public class CreateOrderRequest {
     private String customerId;
     private Long preTaxAmount;
     private Long postTaxAmount;
+
+    public CreateOrderRequest() {
+    }
+
+    public CreateOrderRequest(String customerId, Long preTaxAmount, Long postTaxAmount) {
+        this.customerId = customerId;
+        this.preTaxAmount = preTaxAmount;
+        this.postTaxAmount = postTaxAmount;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public CreateOrderRequest setCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public Long getPreTaxAmount() {
+        return preTaxAmount;
+    }
+
+    public CreateOrderRequest setPreTaxAmount(Long preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public Long getPostTaxAmount() {
+        return postTaxAmount;
+    }
+
+    public CreateOrderRequest setPostTaxAmount(Long postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
+
+    public CreateOrderRequest withCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public CreateOrderRequest withPreTaxAmount(Long preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public CreateOrderRequest withPostTaxAmount(Long postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
 }

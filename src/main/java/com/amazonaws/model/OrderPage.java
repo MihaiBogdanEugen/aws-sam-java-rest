@@ -17,14 +17,45 @@
 
 package com.amazonaws.model;
 
-import lombok.Builder;
-import lombok.Getter;
-
 import java.util.List;
 
-@Builder
-@Getter
 public class OrderPage {
-    private final List<Order> orders;
-    private final String lastEvaluatedKey;
+    private List<Order> orders;
+    private String lastEvaluatedKey;
+
+    public OrderPage() {
+    }
+
+    public OrderPage(List<Order> orders, String lastEvaluatedKey) {
+        this.orders = orders;
+        this.lastEvaluatedKey = lastEvaluatedKey;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public OrderPage setOrders(List<Order> orders) {
+        this.orders = orders;
+        return this;
+    }
+
+    public String getLastEvaluatedKey() {
+        return lastEvaluatedKey;
+    }
+
+    public OrderPage setLastEvaluatedKey(String lastEvaluatedKey) {
+        this.lastEvaluatedKey = lastEvaluatedKey;
+        return this;
+    }
+
+    public OrderPage withOrders(List<Order> orders) {
+        this.orders = orders;
+        return this;
+    }
+
+    public OrderPage withLastEvaluatedKey(String lastEvaluatedKey) {
+        this.lastEvaluatedKey = lastEvaluatedKey;
+        return this;
+    }
 }

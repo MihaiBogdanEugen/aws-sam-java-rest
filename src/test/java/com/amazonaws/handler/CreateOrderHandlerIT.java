@@ -39,7 +39,7 @@ public class CreateOrderHandlerIT extends OrderHandlerTestBase {
 
     @Test
     public void handleRequest_whenCreateOrderInputStreamOk_puts200InOutputStream() throws IOException {
-        Context ctxt = TestContext.builder().build();
+        Context ctxt = new TestContext();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
 
         String input = "{\"body\": \"{\\\"customerId\\\": \\\"foo\\\", \\\"preTaxAmount\\\": 3, \\\"postTaxAmount\\\": 10}\"}";

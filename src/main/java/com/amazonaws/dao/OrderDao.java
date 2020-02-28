@@ -104,18 +104,18 @@ public class OrderDao {
                 .map(this::convert)
                 .collect(Collectors.toList());
 
-        OrderPage.OrderPageBuilder builder = OrderPage.builder().orders(orders);
+        OrderPage orderPage = new OrderPage().withOrders(orders);
         if (result.lastEvaluatedKey() != null && !result.lastEvaluatedKey().isEmpty()) {
             if ((!result.lastEvaluatedKey().containsKey(ORDER_ID)
                     || isNullOrEmpty(result.lastEvaluatedKey().get(ORDER_ID).s()))) {
                 throw new IllegalStateException(
                     "orderId did not exist or was not a non-empty string in the lastEvaluatedKey");
             } else {
-                builder.lastEvaluatedKey(result.lastEvaluatedKey().get(ORDER_ID).s());
+                orderPage.withLastEvaluatedKey(result.lastEvaluatedKey().get(ORDER_ID).s());
             }
         }
 
-        return builder.build();
+        return orderPage;
     }
 
     /**
@@ -206,44 +206,44 @@ public class OrderDao {
         if (item == null || item.isEmpty()) {
             return null;
         }
-        Order.OrderBuilder builder = Order.builder();
+        Order order = new Order();
 
         try {
-            builder.orderId(item.get(ORDER_ID).s());
+            order.withOrderId(item.get(ORDER_ID).s());
         } catch (NullPointerException e) {
             throw new IllegalStateException(
                     "item did not have an orderId attribute or it was not a String");
         }
 
         try {
-            builder.customerId(item.get("customerId").s());
+            order.withCustomerId(item.get("customerId").s());
         } catch (NullPointerException e) {
             throw new IllegalStateException(
                     "item did not have an customerId attribute or it was not a String");
         }
 
         try {
-            builder.preTaxAmount(new BigDecimal(item.get("preTaxAmount").n()));
+            order.withPreTaxAmount(new BigDecimal(item.get("preTaxAmount").n()));
         } catch (NullPointerException | NumberFormatException e) {
             throw new IllegalStateException(
                     "item did not have an preTaxAmount attribute or it was not a Number");
         }
 
         try {
-            builder.postTaxAmount(new BigDecimal(item.get("postTaxAmount").n()));
+            order.withPostTaxAmount(new BigDecimal(item.get("postTaxAmount").n()));
         } catch (NullPointerException | NumberFormatException e) {
             throw new IllegalStateException(
                     "item did not have an postTaxAmount attribute or it was not a Number");
         }
 
         try {
-            builder.version(Long.valueOf(item.get("version").n()));
+            order.withVersion(Long.valueOf(item.get("version").n()));
         } catch (NullPointerException | NumberFormatException e) {
             throw new IllegalStateException(
                     "item did not have an version attribute or it was not a Number");
         }
 
-        return builder.build();
+        return order;
     }
 
     private Map<String, AttributeValue> createOrderItem(final CreateOrderRequest order) {
@@ -293,13 +293,12 @@ public class OrderDao {
                         .item(item)
                         .conditionExpression("attribute_not_exists(orderId)")
                         .build());
-                return Order.builder()
-                        .orderId(item.get(ORDER_ID).s())
-                        .customerId(item.get("customerId").s())
-                        .preTaxAmount(new BigDecimal(item.get("preTaxAmount").n()))
-                        .postTaxAmount(new BigDecimal(item.get("postTaxAmount").n()))
-                        .version(Long.valueOf(item.get("version").n()))
-                        .build();
+                return new Order()
+                        .withOrderId(item.get(ORDER_ID).s())
+                        .withCustomerId(item.get("customerId").s())
+                        .withPreTaxAmount(new BigDecimal(item.get("preTaxAmount").n()))
+                        .withPostTaxAmount(new BigDecimal(item.get("postTaxAmount").n()))
+                        .withVersion(Long.valueOf(item.get("version").n()));
             } catch (ConditionalCheckFailedException e) {
                 tries++;
             } catch (ResourceNotFoundException e) {

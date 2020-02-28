@@ -17,9 +17,6 @@
 
 package com.amazonaws.model.response;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,13 +24,14 @@ import java.util.Map;
 /**
  * POJO containing response object for API Gateway.
  */
-@Getter
-@JsonAutoDetect
 public class GatewayResponse<T> {
 
-    private final T body;
-    private final Map<String, String> headers;
-    private final int statusCode;
+    private T body;
+    private Map<String, String> headers;
+    private int statusCode;
+
+    public GatewayResponse() {
+    }
 
     /**
      * Creates a GatewayResponse object.
@@ -45,5 +43,47 @@ public class GatewayResponse<T> {
         this.statusCode = statusCode;
         this.body = body;
         this.headers = Collections.unmodifiableMap(new HashMap<>(headers));
+    }
+
+    public T getBody() {
+        return body;
+    }
+
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public GatewayResponse<T> setBody(T body) {
+        this.body = body;
+        return this;
+    }
+
+    public GatewayResponse<T> setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+        return this;
+    }
+
+    public GatewayResponse<T> setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+        return this;
+    }
+
+    public GatewayResponse<T> withBody(T body) {
+        this.body = body;
+        return this;
+    }
+
+    public GatewayResponse<T> withHeaders(Map<String, String> headers) {
+        this.headers = headers;
+        return this;
+    }
+
+    public GatewayResponse<T> withStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+        return this;
     }
 }
