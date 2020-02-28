@@ -18,11 +18,11 @@ package com.amazonaws.handler;
 import com.amazonaws.model.response.ErrorMessage;
 import com.amazonaws.model.response.GatewayResponse;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -58,5 +58,9 @@ public interface OrderRequestStreamHandler extends RequestStreamHandler {
 
     default boolean isNullOrEmpty(final String string) {
         return string == null || string.isEmpty();
+    }
+
+    default boolean isNull(final JsonNode node) {
+        return node == null || node.isNull() || node.isMissingNode();
     }
 }

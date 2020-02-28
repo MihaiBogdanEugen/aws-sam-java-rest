@@ -17,15 +17,27 @@
 
 package com.amazonaws.model.request;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Setter
-@Getter
-@NoArgsConstructor
-@JsonAutoDetect
 public class GetOrdersRequest {
     private String exclusiveStartKey;
+
+    public GetOrdersRequest() {
+    }
+
+    public GetOrdersRequest(String exclusiveStartKey) {
+        this.exclusiveStartKey = exclusiveStartKey;
+    }
+
+    public GetOrdersRequest withExclusiveStartKey(String exclusiveStartKey) {
+        this.exclusiveStartKey = exclusiveStartKey;
+        return this;
+    }
+
+    public String getExclusiveStartKey() {
+        return exclusiveStartKey;
+    }
+
+    public GetOrdersRequest setExclusiveStartKey(String exclusiveStartKey) {
+        this.exclusiveStartKey = exclusiveStartKey;
+        return this;
+    }
 }

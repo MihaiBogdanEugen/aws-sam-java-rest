@@ -17,10 +17,6 @@
 
 package com.amazonaws.handler;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.TestContext;
@@ -32,6 +28,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+
 public class CreateOrderHandlerIT extends OrderHandlerTestBase {
 
     private CreateOrderHandler sut = new CreateOrderHandler();
@@ -41,7 +39,7 @@ public class CreateOrderHandlerIT extends OrderHandlerTestBase {
 
     @Test
     public void handleRequest_whenCreateOrderInputStreamOk_puts200InOutputStream() throws IOException {
-        Context ctxt = TestContext.builder().build();
+        Context ctxt = new TestContext();
         ByteArrayOutputStream os = new ByteArrayOutputStream();
 
         String input = "{\"body\": \"{\\\"customerId\\\": \\\"foo\\\", \\\"preTaxAmount\\\": 3, \\\"postTaxAmount\\\": 10}\"}";

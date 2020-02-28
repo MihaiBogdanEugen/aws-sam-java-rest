@@ -17,21 +17,93 @@
 
 package com.amazonaws.model.request;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@JsonAutoDetect
 public class UpdateOrderRequest {
     private String orderId;
     private String customerId;
     private BigDecimal preTaxAmount;
     private BigDecimal postTaxAmount;
     private Long version;
+
+    public UpdateOrderRequest() {
+    }
+
+    public UpdateOrderRequest(String orderId, String customerId, BigDecimal preTaxAmount, BigDecimal postTaxAmount, Long version) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.preTaxAmount = preTaxAmount;
+        this.postTaxAmount = postTaxAmount;
+        this.version = version;
+    }
+
+    public UpdateOrderRequest withOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public UpdateOrderRequest withCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public UpdateOrderRequest withPreTaxAmount(BigDecimal preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public UpdateOrderRequest withPostTaxAmount(BigDecimal postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
+
+    public UpdateOrderRequest withVersion(Long version) {
+        this.version = version;
+        return this;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public UpdateOrderRequest setOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public UpdateOrderRequest setCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public BigDecimal getPreTaxAmount() {
+        return preTaxAmount;
+    }
+
+    public UpdateOrderRequest setPreTaxAmount(BigDecimal preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public BigDecimal getPostTaxAmount() {
+        return postTaxAmount;
+    }
+
+    public UpdateOrderRequest setPostTaxAmount(BigDecimal postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public UpdateOrderRequest setVersion(Long version) {
+        this.version = version;
+        return this;
+    }
 }

@@ -18,16 +18,46 @@
 package com.amazonaws.model.response;
 
 import com.amazonaws.model.Order;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
-@JsonAutoDetect
 public class GetOrdersResponse {
-    private final String lastEvaluatedKey;
-    private final List<Order> orders;
+    private String lastEvaluatedKey;
+    private List<Order> orders;
+
+    public GetOrdersResponse() {
+    }
+
+    public GetOrdersResponse(String lastEvaluatedKey, List<Order> orders) {
+        this.lastEvaluatedKey = lastEvaluatedKey;
+        this.orders = orders;
+    }
+
+    public String getLastEvaluatedKey() {
+        return lastEvaluatedKey;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public GetOrdersResponse setLastEvaluatedKey(String lastEvaluatedKey) {
+        this.lastEvaluatedKey = lastEvaluatedKey;
+        return this;
+    }
+
+    public GetOrdersResponse setOrders(List<Order> orders) {
+        this.orders = orders;
+        return this;
+    }
+
+    public GetOrdersResponse withLastEvaluatedKey(String lastEvaluatedKey) {
+        this.lastEvaluatedKey = lastEvaluatedKey;
+        return this;
+    }
+
+    public GetOrdersResponse withOrders(List<Order> orders) {
+        this.orders = orders;
+        return this;
+    }
 }

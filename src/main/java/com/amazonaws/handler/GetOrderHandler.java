@@ -29,11 +29,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Optional;
-import javax.inject.Inject;
 
 public class GetOrderHandler implements OrderRequestStreamHandler {
     @Inject
@@ -57,7 +57,7 @@ public class GetOrderHandler implements OrderRequestStreamHandler {
             writeInvalidJsonInStreamResponse(objectMapper, output, e.getMessage());
             return;
         }
-        if (event == null) {
+        if (isNull(event)) {
             writeInvalidJsonInStreamResponse(objectMapper, output, "event was null");
             return;
         }

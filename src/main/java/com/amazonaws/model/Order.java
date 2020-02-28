@@ -17,23 +17,93 @@
 
 package com.amazonaws.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Order {
     private String orderId;
     private String customerId;
     private BigDecimal preTaxAmount;
     private BigDecimal postTaxAmount;
     private Long version;
+
+    public Order() {
+    }
+
+    public Order(String orderId, String customerId, BigDecimal preTaxAmount, BigDecimal postTaxAmount, Long version) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.preTaxAmount = preTaxAmount;
+        this.postTaxAmount = postTaxAmount;
+        this.version = version;
+    }
+
+    public Order withOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public Order withCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public Order withPreTaxAmount(BigDecimal preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public Order withPostTaxAmount(BigDecimal postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
+
+    public Order withVersion(Long version) {
+        this.version = version;
+        return this;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public Order setOrderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public Order setCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    public BigDecimal getPreTaxAmount() {
+        return preTaxAmount;
+    }
+
+    public Order setPreTaxAmount(BigDecimal preTaxAmount) {
+        this.preTaxAmount = preTaxAmount;
+        return this;
+    }
+
+    public BigDecimal getPostTaxAmount() {
+        return postTaxAmount;
+    }
+
+    public Order setPostTaxAmount(BigDecimal postTaxAmount) {
+        this.postTaxAmount = postTaxAmount;
+        return this;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public Order setVersion(Long version) {
+        this.version = version;
+        return this;
+    }
 }

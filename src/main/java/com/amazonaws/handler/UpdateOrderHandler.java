@@ -32,11 +32,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Optional;
-import javax.inject.Inject;
 
 public class UpdateOrderHandler implements OrderRequestStreamHandler {
     @Inject
@@ -60,7 +60,7 @@ public class UpdateOrderHandler implements OrderRequestStreamHandler {
             writeInvalidJsonInStreamResponse(objectMapper, output, e.getMessage());
             return;
         }
-        if (event == null) {
+        if (isNull(event)) {
             writeInvalidJsonInStreamResponse(objectMapper, output, "event was null");
             return;
         }
@@ -112,12 +112,12 @@ public class UpdateOrderHandler implements OrderRequestStreamHandler {
 
         try {
             Order updatedOrder = orderDao.updateOrder(
-                    Order.builder().orderId(orderId)
-                            .customerId(request.getCustomerId())
-                            .version(request.getVersion())
-                            .preTaxAmount(request.getPreTaxAmount())
-                            .postTaxAmount(request.getPostTaxAmount())
-                            .build());
+                    new Order()
+                            .withOrderId(orderId)
+                            .withCustomerId(request.getCustomerId())
+                            .withVersion(request.getVersion())
+                            .withPreTaxAmount(request.getPreTaxAmount())
+                            .withPostTaxAmount(request.getPostTaxAmount()));
             objectMapper.writeValue(output, new GatewayResponse<>(
                     objectMapper.writeValueAsString(updatedOrder),
                     APPLICATION_JSON, SC_OK));

@@ -17,16 +17,13 @@
 
 package com.amazonaws.handler;
 
-import com.amazonaws.model.response.GatewayResponse;
 import com.amazonaws.services.lambda.runtime.TestContext;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetOrderHandlerTest {
@@ -35,7 +32,7 @@ public class GetOrderHandlerTest {
     @Test
     public void handleRequest_whenGetOrderInputStreamEmpty_puts400InOutputStream() throws IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        sut.handleRequest(new ByteArrayInputStream(new byte[0]), os, TestContext.builder().build());
+        sut.handleRequest(new ByteArrayInputStream(new byte[0]), os, new TestContext());
         assertTrue(os.toString().contains("Invalid JSON"));
         assertTrue(os.toString().contains("400"));
     }
@@ -44,7 +41,7 @@ public class GetOrderHandlerTest {
     public void handleRequest_whenGetOrderInputStreamHasNoMappedOrderIdPathParam_puts400InOutputStream() throws IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         String input = "{\"pathParameters\": { }}";
-        sut.handleRequest(new ByteArrayInputStream(input.getBytes()), os, TestContext.builder().build());
+        sut.handleRequest(new ByteArrayInputStream(input.getBytes()), os, new TestContext());
         assertTrue(os.toString().contains("order_id was not set"));
         assertTrue(os.toString().contains("400"));
     }
